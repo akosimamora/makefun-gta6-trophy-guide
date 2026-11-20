@@ -3,23 +3,57 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>GTA VI trophy checklist</title>
+<title>GTA VI Trophy Guide &amp; Tracker — All 55 PS5 Trophies</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header>
-  <h1>GTA VI trophy checklist</h1>
-  <p id="progress">0 of 55 earned</p>
+<header class="hero">
+  <div>
+    <p class="eyebrow">Grand Theft Auto VI &middot; PlayStation 5 &middot; 55 trophies</p>
+    <h1>GTA VI Trophy Guide &amp; Tracker</h1>
+    <p class="lede">Every trophy with its official name, description and grade, a guide in our own words with its sources beside it, and a roadmap to the platinum. Progress is saved in your browser — no account, no network.</p>
+  </div>
+  <div class="progress-card" aria-label="Platinum progress">
+    <p id="progress-text">0 of 55 earned</p>
+    <div class="bar"><div id="progress-bar"></div></div>
+    <p id="grade-counts" class="grade-counts"></p>
+    <p class="platinum-note">Platinum: Vice Got a Price! — unlocks with the other 54.</p>
+  </div>
 </header>
-<div class="controls">
-  <label>Grade <select id="grade"><option value="all">All</option><option value="platinum">Platinum</option><option value="gold">Gold</option><option value="silver">Silver</option><option value="bronze">Bronze</option></select></label>
-  <button id="export" type="button">Export progress</button>
-  <label class="import">Import progress <input id="import" type="file" accept="application/json"></label>
+
+<div class="controls" role="search">
+  <label>Search <input id="search" type="search" placeholder="Trophy, mission or keyword…"></label>
+  <label>Grade <select id="grade-filter"><option value="all">All grades</option><option value="platinum">Platinum</option><option value="gold">Gold</option><option value="silver">Silver</option><option value="bronze">Bronze</option></select></label>
+  <label>Kind <select id="kind-filter"><option value="all">All kinds</option><option value="story">Story</option><option value="mission">Mission</option><option value="stranger">Stranger</option><option value="activity">Activity</option><option value="collectible">Collectible</option><option value="combat">Combat</option><option value="robbery">Robbery</option><option value="exploration">Exploration</option><option value="economy">Economy</option><option value="completion">100% completion</option><option value="platinum">Platinum</option></select></label>
+  <label>Status <select id="status-filter"><option value="all">All</option><option value="earned">Earned</option><option value="unearned">Not earned</option><option value="missable">Missable only</option></select></label>
+  <label class="check"><input id="spoiler-toggle" type="checkbox" checked> Hide spoilers (secret &amp; story trophies hidden until earned)</label>
+  <button id="export-btn" type="button">Export progress</button>
+  <label class="import">Import progress <input id="import-input" type="file" accept="application/json,.json"></label>
+  <button id="reset-btn" type="button">Reset progress</button>
 </div>
-<table>
-  <thead><tr><th>Earned</th><th>Trophy</th><th>Grade</th><th>How to get it</th></tr></thead>
-  <tbody id="rows"></tbody>
-</table>
+
+<main class="layout">
+  <section aria-label="Trophy checklist">
+    <p id="list-count" class="list-count"></p>
+    <ul id="trophy-list" class="trophy-list"></ul>
+  </section>
+  <aside id="detail-panel" class="detail" aria-label="Trophy guide detail">
+    <p class="detail-empty">Click a trophy to open its guide and sources here.</p>
+  </aside>
+</main>
+
+<section class="roadmap" id="roadmap" aria-label="Roadmap to the platinum">
+  <h2>Roadmap to the platinum</h2>
+  <p class="roadmap-intro">Built only from the official descriptions: story first, then stranger strands, then activities, then cleanup, then money — 100% completion last. Click any trophy chip to open its guide.</p>
+  <ol id="roadmap-stages"></ol>
+  <p class="missable-note"><strong>Missable check:</strong> only 1 of 55 is flagged — <strong>Actions Speak Louder</strong> — because it is the only description that implies a one-time choice (“Choices made”). No other official description states a one-time-only condition, so no other trophy is flagged. Keep a manual save before major story decisions, just in case.</p>
+</section>
+
+<footer>
+  <h2>How this guide is sourced</h2>
+  <p>Names, descriptions and grades are exactly as PlayStation publishes them (trophy list via Exophase). Every guide is written in our own words for this entry and names its source beside it. Where the official description is the whole instruction — “Complete Chapter 1” — the guide says so plainly instead of inventing steps. No specific location, count or step is claimed unless the official description states it, or the trophy list as published by Exophase and PSNProfiles states the count. No Rockstar logo or official artwork is used anywhere: the look is our own.</p>
+  <p>Works fully offline: every file this page loads lives under app/. Progress is stored in your browser (localStorage) and can be exported to a file and imported back.</p>
+</footer>
 <script type="module" src="app.js"></script>
 </body>
 </html>

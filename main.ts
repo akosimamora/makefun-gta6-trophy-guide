@@ -14,13 +14,25 @@
 // Outside the grader's container, MAKEFUN_OUTPUT_DIR stands in for /output:
 //   mkdir -p out && MAKEFUN_OUTPUT_DIR=out node main.ts
 
-import { cpSync, existsSync, mkdirSync, writeFileSync } from 'node:fs';
+import { cpSync, existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { buildDossier } from './vendor/makefun-frontend.ts';
 
 const here = fileURLToPath(new URL('.', import.meta.url));
 const out = process.env.MAKEFUN_OUTPUT_DIR ?? '/output';
+
+// Authored sanity check: the guide must name all 55 official trophies, each with a
+// non-blank guide of its own, before anything is handed in. Fail loudly, not silently.
+const trophyDocument = JSON.parse(readFileSync(join(here, 'app', 'data', 'trophies.json'), 'utf8'));
+const trophyList = trophyDocument.trophies ?? trophyDocument;
+if (!Array.isArray(trophyList) || trophyList.length !== 55) {
+  throw new Error(`trophies.json must hold 55 trophies, found ${Array.isArray(trophyList) ? trophyList.length : 'no array'}`);
+}
+for (const trophy of trophyList) {
+  if (typeof trophy.name !== 'string' || !trophy.name.trim()) throw new Error('trophies.json holds a trophy with no name');
+  if (typeof trophy.guide !== 'string' || !trophy.guide.trim()) throw new Error(`trophy ${trophy.name} has no guide`);
+}
 
 mkdirSync(out, { recursive: true });
 cpSync(join(here, 'app'), join(out, 'app'), { recursive: true });
